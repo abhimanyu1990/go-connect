@@ -7,8 +7,6 @@ import(
 	"go-connect/app/controllers"
 )
 
-var logger = Logger()
-
 var Router = func() *mux.Router{
 	router := mux.NewRouter()
 	router.HandleFunc("/api/register", controllers.Register)

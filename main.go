@@ -2,20 +2,27 @@ package main
 
 import(
 	"net/http"
-	"fmt"
 	"go-connect/app/conf"
+	"go-connect/environment"
+	"go-connect/app/utility"
 )
 
-var logger = conf.Logger()
+var logger = utility.Logger()
 
 func main(){
 	
 	// Initializing all the routes
 	routes := conf.Router()
+	env := environment.Environment()
 	
-	logger.Info.Println("Starting the application at http://localhost:8000")
-	err := http.ListenAndServe(":"+"8000", routes) 
+	logger.Info.Println("Starting the application at http://localhost:8000 ", env )
+
+	port := env["app_port"]
+	if port == "" {
+		port = "8000" //localhost
+	}
+	err := http.ListenAndServe(":"+port, routes) 
 	if err != nil {
-		fmt.Print(err)
+		logger.Error.Println(err)
 	}
 }

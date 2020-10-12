@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-
 var Register = func(w http.ResponseWriter, r *http.Request){
-        fmt.Fprintf(w, "Hello!")
+	logger.Info.Println("intialized register router")
+    fmt.Fprintf(w, "Hello!")
 }
