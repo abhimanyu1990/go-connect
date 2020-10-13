@@ -4,6 +4,7 @@ import (
 	"gorm.io/gorm"
 	"fmt"
 	"gorm.io/driver/postgres"
+	"go-connect/app/models"
 )
 
 var db *gorm.DB
@@ -36,6 +37,8 @@ func init(){
 
 	// SetMaxOpenConns sets the maximum number of open connections to the database.
 	sqlDB.SetMaxOpenConns(100)
+
+	db.Debug().AutoMigrate(&models.RegistrationToken{},&models.User{},&models.Role{},&models.Permission{},&models.Post{},&models.PostAttachment{},&models.Comment{},&models.CommentAttachment{},&models.Profile{},&models.ForgotPasswordToken{})
 	
 	if err != nil {
 		logger.Error.Println(err)
