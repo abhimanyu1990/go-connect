@@ -1,0 +1,89 @@
+basePath: /api
+consumes:
+- application/json
+definitions:
+  ResponseError:
+    properties:
+      ErrorId:
+        format: int64
+        type: integer
+      IsSuccess:
+        type: boolean
+      Message:
+        type: string
+      ResponseCode:
+        format: int64
+        type: integer
+      TimeOfDay:
+        format: date-time
+        type: string
+    type: object
+    x-go-package: go-connect/app/dto
+  UserRequest:
+    properties:
+      ConfirmPassword:
+        type: string
+      Email:
+        type: string
+      Password:
+        type: string
+    type: object
+    x-go-package: go-connect/app/dto
+  UserResponse:
+    properties:
+      Data:
+        properties:
+          ConfirmPassword:
+            type: string
+          Email:
+            type: string
+          Password:
+            type: string
+        type: object
+      IsSuccess:
+        type: boolean
+    type: object
+    x-go-package: go-connect/app/dto
+host: 192.168.0.119:8888
+info:
+  description: Documentation of Forum API.
+  title: Forum.
+  version: 1.0.0
+paths:
+  /register:
+    post:
+      operationId: idOfRegisterEndpoint
+      parameters:
+      - description: This text will appear as description of your request body.
+        in: body
+        name: Body
+        schema:
+          $ref: '#/definitions/UserRequest'
+      responses:
+        "200":
+          $ref: '#/responses/UserResponse'
+        "400":
+          $ref: '#/responses/ResponseError'
+        "401":
+          $ref: '#/responses/ResponseError'
+        default:
+          $ref: '#/responses/ResponseError'
+      summary: User registration.
+      tags:
+      - register
+produces:
+- application/json
+responses:
+  ResponseError:
+    description: This text will appear as description of your response body.
+    schema:
+      $ref: '#/definitions/ResponseError'
+  UserResponse:
+    schema:
+      $ref: '#/definitions/UserResponse'
+schemes:
+- http
+securityDefinitions:
+  basic:
+    type: basic
+swagger: "2.0"

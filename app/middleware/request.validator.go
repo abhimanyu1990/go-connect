@@ -9,13 +9,16 @@ import(
 	"fmt"
 	"github.com/go-playground/validator/v10"
 	"go-connect/app/utility"
+	"github.com/gorilla/context"
+	//"github.com/rs/cors"
 )
 var validate = validator.New()
+
 var RequestValidator = func(next http.Handler, dataType reflect.Type) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		logger.Info.Println("test...")
 		reqBody, _ := ioutil.ReadAll(r.Body)
-		isValidated, err := objectConverter(reqBody,dataType)
-
+		isValidated, err := objectConverter(reqBody,dataType,r)
 		if isValidated {
 			next.ServeHTTP(w, r)
 		}else {
@@ -25,15 +28,15 @@ var RequestValidator = func(next http.Handler, dataType reflect.Type) http.Handl
   }
 
 
-  func objectConverter(reqBody []uint8, dataType reflect.Type) (bool, error) {
+  func objectConverter(reqBody []uint8, dataType reflect.Type, r *http.Request) (bool, error) {
 			var objType = dataType.String()
 			var isValidated = true
 			var err error
-
 			switch objType {
 			case "dto.UserRequest":
 				obj := dto.UserRequest{}
 				json.Unmarshal(reqBody,&obj)
+				context.Set(r, "reqBody", obj)
 				err = validate.Struct(obj)
 			default:
 				fmt.Println("two")
