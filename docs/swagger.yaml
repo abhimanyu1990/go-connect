@@ -84,6 +84,8 @@ responses:
 schemes:
 - http
 securityDefinitions:
-  basic:
-    type: basic
+  api_key:
+    in: header
+    name: Authorization
+    type: apiKey
 swagger: "2.0"

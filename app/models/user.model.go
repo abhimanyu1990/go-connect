@@ -8,7 +8,7 @@ import(
 type User struct{
 	gorm.Model
 	ID uint
-	Email *string `gorm:"primaryKey"`
+	Email string `gorm:"primaryKey"`
 	Password string
 	Post []Post `gorm:"foreignKey:UserRefer"`
 	Comment []Comment `gorm:"foreignKey:UserRefer"`

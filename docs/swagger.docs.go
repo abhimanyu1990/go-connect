@@ -13,12 +13,12 @@
 //     Produces:
 //     - application/json
 //
-//     Security:
-//     - basic
 //
-//    SecurityDefinitions:
-//    basic:
-//      type: basic
+//     SecurityDefinitions:
+//       api_key:
+//            type: apiKey
+//            name: Authorization
+//            in: header
 //
 // swagger:meta
 package docs

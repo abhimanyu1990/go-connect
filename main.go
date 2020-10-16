@@ -2,7 +2,7 @@ package main
 
 import(
 	"net/http"
-	"go-connect/app/conf"
+	"go-connect/app/router"
 	"go-connect/environment"
 	"go-connect/app/utility"
 )
@@ -12,10 +12,12 @@ var logger = utility.Logger()
 func main(){
 	
 	// Initializing all the routes
-	routes := conf.Router()
+	routes := router.Router()
 	env := environment.Environment()
+
 	
-	logger.Info.Println("Starting the application at http://localhost:8000 ", env )
+	
+	logger.Info.Println("Starting the application at http://localhost:8888 ", env )
 
 	port := env["app_port"]
 	if port == "" {

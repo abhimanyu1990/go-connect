@@ -2,20 +2,22 @@ package dto
 
 import(
 	"github.com/go-playground/validator/v10"
+
 )
 
 var validate *validator.Validate
-type UserRequest struct{
+type RegistrationRequest struct{
 	Email string  `validate:"required,email"`
-	Password string
+	Password string `validate:"passwd"`
 	ConfirmPassword string
 }
 
-type UserResponse struct{
+type RegistrationResponse struct{
 	Data struct{
+		Id uint
 		Email string  
-		Password string
-		ConfirmPassword string
 	}
 	IsSuccess bool
 }
+
+

@@ -1,8 +1,7 @@
-package conf
+package router
 
 import(
 	"github.com/gorilla/mux"
-	"fmt"
 	"reflect"
 	"go-connect/app/controllers"
 	"go-connect/app/middleware"
@@ -27,7 +26,6 @@ var Router = func() *mux.Router{
 
 
 	RegisterHandler := http.HandlerFunc(controllers.Register)
-	router.Handle("/api/register",c.Handler(middleware.RequestValidator(RegisterHandler,reflect.TypeOf(dto.UserRequest{})))).Methods("POST")
-	fmt.Println("var1 = ", reflect.TypeOf(router)) 
+	router.Handle("/api/register",c.Handler(middleware.RequestValidator(RegisterHandler,reflect.TypeOf(dto.RegistrationRequest{})))).Methods("POST")
     return router
 }

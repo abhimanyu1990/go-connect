@@ -9,7 +9,7 @@ import(
 type Profile struct{
 	gorm.Model
 	ID uint
-	UserRefer string  `gorm:"unique"`
+	UserRefer string 
 	User User `gorm:"foreignKey:UserRefer; references:Email; constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`  // belongTo relation to establish one to one relationship
 	FirstName string `gorm:"not null"`
 	LastName string  `gorm:"not null"`
