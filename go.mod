@@ -11,4 +11,6 @@ require (
 	github.com/joho/godotenv v1.3.0
 	gorm.io/driver/postgres v1.0.2
 	gorm.io/gorm v1.20.2
+	github.com/google/uuid v1.1.2
+	gopkg.in/mail.v2 v2.3.1
 )

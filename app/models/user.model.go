@@ -6,10 +6,11 @@ import(
 )
 
 type User struct{
-	gorm.Model
-	ID uint
+	Id uint `gorm:"autoIncrememt;not null"`
 	Email string `gorm:"primaryKey"`
-	Password string
+	Password string `gorm:"not null"`
+	Salt string `gorm:"not null"`
+	AccountLocked bool `gorm:"DEFAULT:true"`
 	Post []Post `gorm:"foreignKey:UserRefer"`
 	Comment []Comment `gorm:"foreignKey:UserRefer"`
 	Role []*Role `gorm:"many2many:user_role;"`
